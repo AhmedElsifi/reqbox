@@ -8,7 +8,7 @@ import { showWelcome } from "./ui/welcome.js";
 
 showWelcome();
 
-const method = select({
+const method = await select({
   message: "Please select a method for your request:",
   choices: [
     {
@@ -33,3 +33,17 @@ const method = select({
     },
   ],
 });
+
+const url = await input({
+  message: "Enter your server URL (default: http://localhost:3000)",
+  default: "http://localhost:3000",
+});
+
+const route = await input({
+  message: "Enter your route (e.g. /users, default: /)",
+  default: "/",
+});
+
+const finalUrl = `${url}${route}`;
+
+console.log(`The Report for /${method} on ${finalUrl}`);
