@@ -1,0 +1,19 @@
+{
+    "name": "reqbox",
+    "version": "1.0.0",
+    "description": "An interactive CLI HTTP client for making and inspecting API requests",
+    "type": "module",
+    "bin": {
+        "reqbox": "./src/app.js"
+    },
+    "scripts": {
+        "start": "node src/app.js"
+    },
+    "dependencies": {
+        "@inquirer/prompts": "^8.7.2",
+        "boxen": "^8.0.1",
+        "chalk": "^6.0.0",
+        "commander": "^15.0.0",
+        "ora": "^9.4.1"
+    }
+}
