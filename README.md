@@ -1,134 +1,136 @@
-# 📦 Reqbox
+# Reqbox
 
-> A simple interactive CLI HTTP client for making and inspecting API requests.
+An interactive terminal HTTP client built with Node.js. Make requests, inspect responses, and keep a local history — all without leaving the command line.
 
-Reqbox lets you make HTTP requests directly from your terminal without leaving the command line.
-
-Select a method, enter a URL, optionally provide a request body, and inspect the response — all through an interactive CLI.
-
-## 🚧 Status
-
-Reqbox is currently under active development.
-
-## ✨ Features
-
-* Interactive HTTP method selection
-* Custom URL input
-* Local development URL support
-* Optional request body
-* HTTP response status and body
-* Terminal-friendly interface
-
-## 🛠️ Built With
-
-* [Node.js](https://nodejs.org/)
-* [Inquirer](https://www.npmjs.com/package/@inquirer/prompts)
-* [Chalk](https://www.npmjs.com/package/chalk)
-* [Boxen](https://www.npmjs.com/package/boxen)
-* [Ora](https://www.npmjs.com/package/ora)
-* [Commander](https://www.npmjs.com/package/commander)
-
-## 📦 Installation
-
-Clone the repository:
+## Installation
 
 ```bash
 git clone https://github.com/your-username/reqbox.git
 cd reqbox
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
 
-Run Reqbox:
+## Usage
 
 ```bash
 npm start
 ```
 
-You can also install it locally as a CLI:
+Or install globally:
 
 ```bash
 npm install -g .
-```
-
-Then run:
-
-```bash
 reqbox
 ```
 
-## 🚀 Usage
+### Main Menu
 
-Start Reqbox:
+```
+╭─────────────────────────────────────────╮
+│                                         │
+│                 REQBOX                  │
+│         Interactive HTTP Client         │
+│                                         │
+│   Make HTTP requests from your terminal │
+│                                         │
+╰─────────────────────────────────────────╯
 
-```bash
-reqbox
+? What would you like to do?
+❯ New Request
+  Request History
+  Exit
 ```
 
-You'll be prompted to select an HTTP method:
+### Making a Request
 
-```text
-? Select HTTP method
-❯ GET
-  POST
-  PUT
-  PATCH
-  DELETE
+1. Select an HTTP method (GET, POST, PUT, PATCH, DELETE)
+2. Enter a server URL (defaults to `http://localhost:3000`)
+3. Enter a route (defaults to `/`)
+4. Optionally add query parameters
+5. Optionally add custom headers
+6. Optionally add a JSON body (for POST, PUT, PATCH, DELETE)
+7. View the formatted response
+
+### Example
+
+```
+REQBOX > New Request
+
+? Select HTTP method: POST
+? Enter server URL: http://localhost:3000
+? Enter route: /users
+? Add query parameters? No
+? Add custom headers? Yes
+? Header name: Authorization
+? Header value: Bearer token123
+? Add another header? No
+? Add a request body? Yes
+? Enter JSON body: {"name": "Ahmed", "age": 20}
+
+╭──────────────────────────────────────────────────────╮
+│ Request                                              │
+│ POST http://localhost:3000/users                     │
+│                                                      │
+│ Response                                             │
+│ 201 Created                                          │
+│                                                      │
+│ Body                                                 │
+│ {                                                    │
+│   "id": 1,                                           │
+│   "name": "Ahmed",                                   │
+│   "age": 20                                          │
+│ }                                                    │
+╰──────────────────────────────────────────────────────╯
 ```
 
-Then enter the URL.
+### Request History
 
-For local development, Reqbox uses:
+All requests are saved to `~/.reqbox/history.json`. From the main menu, select **Request History** to:
 
-```text
-http://localhost:3000
+- View past requests with method, URL, status, and timestamp
+- Resend a saved request
+- Edit a saved request before resending
+- Delete individual entries
+
+## Project Structure
+
+```
+src/
+├── app.js                  # Entry point and main loop
+├── history/
+│   └── history.js          # Persistent history (load/save/delete)
+├── request/
+│   ├── builder.js          # Builds fetch options from user input
+│   └── client.js           # Sends requests with spinner and error handling
+├── ui/
+│   ├── welcome.js          # Welcome banner
+│   ├── menu.js             # Main menu
+│   ├── prompts.js          # Interactive prompts for building requests
+│   └── display.js          # Response and history display
+└── utils/
+    └── url.js              # URL builder with slash normalization
 ```
 
-as the default base URL.
+## Features
 
-You can then choose whether to send a request body before Reqbox sends the request and displays the response.
+- **Interactive loop** — stays open until you choose Exit
+- **Full request builder** — method, URL, query params, headers, JSON body
+- **JSON validation** — retries on invalid input instead of crashing
+- **Persistent history** — saved to `~/.reqbox/history.json`
+- **Re-run saved requests** — resend or edit before sending
+- **Delete history** — remove individual entries with confirmation
+- **Error handling** — network errors, invalid JSON, corrupted history files
+- **Clean terminal UI** — colored output, boxed responses, spinners
 
-## 🗺️ Roadmap
+## Tech Stack
 
-* [x] Interactive HTTP method selection
-* [x] URL input
-* [x] Localhost default
-* [ ] Request body support
-* [ ] Request headers
-* [ ] Response formatting
-* [ ] Loading indicators
-* [ ] Request history
-* [ ] Saved requests
-* [ ] Environment variables
-* [ ] Interactive request editor
+- Node.js 24+ (native fetch, fs/promises)
+- ES Modules
+- [@inquirer/prompts](https://www.npmjs.com/package/@inquirer/prompts)
+- [chalk](https://www.npmjs.com/package/chalk)
+- [boxen](https://www.npmjs.com/package/boxen)
+- [ora](https://www.npmjs.com/package/ora)
 
-## 📁 Project Structure
+## License
 
-```text
-reqbox/
-├── src/
-│   ├── app.js
-│   └── ui/
-├── package.json
-└── README.md
-```
-
-## 🤝 Contributing
-
-Contributions, suggestions, and bug reports are welcome.
-
-If you'd like to contribute:
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make your changes.
-4. Test your changes.
-5. Open a pull request.
-
-## 📄 License
-
-This project is licensed under the MIT License.
+MIT

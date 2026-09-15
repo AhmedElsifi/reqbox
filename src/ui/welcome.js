@@ -2,15 +2,17 @@ import chalk from "chalk";
 import boxen from "boxen";
 
 export function showWelcome() {
-  const logo = `
-▄▄▄▄  ▄▄▄▄▄  ▄▄▄  ▄▄▄▄   ▄▄▄  ▄▄ ▄▄ 
-██▄█▄ ██▄▄  ██▀██ ██▄██ ██▀██ ▀█▄█▀ 
-██ ██ ██▄▄▄ ▀███▀ ██▄█▀ ▀███▀ ██ ██ 
+  const logo = `                                    
+                  ▄▄                
+                  ██                
+████▄ ▄█▀█▄ ▄████ ████▄ ▄███▄ ██ ██ 
+██ ▀▀ ██▄█▀ ██ ██ ██ ██ ██ ██  ███  
+██    ▀█▄▄▄ ▀████ ████▀ ▀███▀ ██ ██ 
+               ██                   
                ▀▀                   `;
-
   const content = [
     chalk.bold.cyan(logo),
-    chalk.gray("Simple CLI HTTP Client"),
+    chalk.gray("Interactive HTTP Client"),
     "",
     chalk.dim("Make HTTP requests directly from your terminal."),
   ].join("\n");
