@@ -5,15 +5,17 @@ import { select, confirm } from "@inquirer/prompts";
 import { showWelcome } from "./ui/welcome.js";
 import { showMainMenu } from "./ui/menu.js";
 import { promptNewRequest } from "./ui/prompts.js";
-import { displayResponse, displayHistory, showHistoryActions } from "./ui/display.js";
+import {
+  displayResponse,
+  displayHistory,
+  showHistoryActions,
+} from "./ui/display.js";
 import { buildRequest } from "./request/builder.js";
 import { sendRequest } from "./request/client.js";
 import {
   loadHistory,
   saveHistory,
   createHistoryEntry,
-  deleteHistoryEntry,
-  clearAllHistory,
 } from "./history/history.js";
 
 async function main() {
