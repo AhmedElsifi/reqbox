@@ -9,38 +9,17 @@ import { showWelcome } from "./ui/welcome.js";
 showWelcome();
 
 const method = await select({
-  message: "Please select a method for your request:",
-  choices: [
-    {
-      name: "GET",
-      value: "GET",
-    },
-    {
-      name: "POST",
-      value: "POST",
-    },
-    {
-      name: "PUT",
-      value: "PUT",
-    },
-    {
-      name: "PATCH",
-      value: "PATCH",
-    },
-    {
-      name: "DELETE",
-      value: "DELETE",
-    },
-  ],
+  message: "Select a method:",
+  choices: ["GET", "POST", "PUT", "PATCH", "DELETE"],
 });
 
 const url = await input({
-  message: "Enter your server URL (default: http://localhost:3000)",
+  message: "Enter your server URL:",
   default: "http://localhost:3000",
 });
 
 const route = await input({
-  message: "Enter your route (e.g. /users, default: /)",
+  message: "Enter your route (e.g. /users, default: /):",
   default: "/",
 });
 
