@@ -10,6 +10,7 @@ export function showWelcome() {
 ██    ▀█▄▄▄ ▀████ ████▀ ▀███▀ ██ ██ 
                ██                   
                ▀▀                   `;
+
   const content = [
     chalk.bold.cyan(logo),
     chalk.gray("Interactive HTTP Client"),

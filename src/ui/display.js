@@ -2,11 +2,7 @@ import chalk from "chalk";
 import boxen from "boxen";
 import { getPathFromUrl } from "../utils/url.js";
 
-/**
- * Displays the response from a sent request.
- */
 export function displayResponse(url, response) {
-  // If there was a network error
   if (response.error) {
     console.log(
       boxen(
@@ -28,14 +24,13 @@ export function displayResponse(url, response) {
 
   const statusColor = response.ok ? chalk.green : chalk.red;
 
-  // Format the response body
   let formattedBody = response.body;
   if (response.body) {
     try {
       const parsed = JSON.parse(response.body);
       formattedBody = JSON.stringify(parsed, null, 2);
     } catch {
-      // Not JSON, keep as plain text
+      // not JSON, keep as-is
     }
   }
 
@@ -47,7 +42,6 @@ export function displayResponse(url, response) {
     `${statusColor(response.status)} ${statusColor(response.statusText)}`,
   ];
 
-  // Show response headers if present
   if (response.headers && Object.keys(response.headers).length > 0) {
     lines.push("");
     lines.push(chalk.bold("Response Headers"));
@@ -69,9 +63,6 @@ export function displayResponse(url, response) {
   );
 }
 
-/**
- * Displays the request history as a numbered list.
- */
 export function displayHistory(history) {
   if (history.length === 0) {
     console.log(chalk.gray("\nNo request history yet.\n"));
@@ -95,12 +86,8 @@ export function displayHistory(history) {
   console.log();
 }
 
-/**
- * Shows history entry actions and returns the user's choice.
- */
 export async function showHistoryActions(entry) {
   const { select } = await import("@inquirer/prompts");
-
   const path = getPathFromUrl(entry.url);
 
   const choice = await select({
